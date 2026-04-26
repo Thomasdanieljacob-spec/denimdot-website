@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Women</title>
+<style>
+body{font-family:Arial;margin:0;}
+nav{background:#0d1b2a;display:flex;justify-content:center;}
+nav a{color:white;padding:15px;text-decoration:none;}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:20px;}
+.card{text-align:center;border:1px solid #ddd;padding:10px;}
+.card img{width:100%;height:180px;object-fit:cover;}
+</style>
+</head>
+
+<body>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="new-arrivals.html">New Arrivals</a>
+<a href="men.html">Men</a>
+<a href="women.html">Women</a>
+
+</nav>
+
+<h2 style="text-align:center;">Women Collection</h2>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+}
+
+header {
+    background: #0d1b2a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.search-box {
+    text-align: center;
+    margin: 15px;
+}
+
+.search-box input {
+    padding: 10px;
+    width: 60%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.container {
+    display: flex;
+}
+
+.products {
+    flex: 3;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    padding: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+button {
+    background: #0d1b2a;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1b263b;
+}
+
+.cart {
+    flex: 1;
+    background: white;
+    padding: 15px;
+    border-left: 2px solid #ddd;
+}
+
+.cart h2 {
+    margin-top: 0;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>DENIMDOT</h1>
+    <p>Premium Embroidered Denim Collection</p>
+</header>
+
+<div class="search-box">
+    <input type="text" id="search" placeholder="Search denim..." onkeyup="filterProducts()">
+</div>
+
+<div class="container">
+
+    <div class="products" id="productList"></div>
+
+    <div class="cart">
+        <h2>🛒 Cart</h2>
+        <div id="cartItems"></div>
+        <p class="total">Total: $<span id="total">0</span></p>
+    </div>
+
+</div>
+
+<script>
+
+const products = [
+    {name:"Girl with Shades Denim", price:45, img:"sunglasess.png"},
+    {name:"Pocket Embroidery Jeans", price:50, img:"pocket.png"},
+    {name:"Petal Stitch Denim", price:55, img:"petal.png"},
+    {name:"Silver Floral Denim", price:60, img:"silver.png"},
+    {name:"Vintage Butterfly Denim", price:48, img:"pink.png"},
+    {name:"Maryln Stitch Jeans", price:42, img:"maryln.png"},
+    {name:"Girl on the Phone Jeans", price:58, img:"phone.png"},
+    {name:"Pink Lily Jeans", price:65, img:"lily.png"},
+    
+    
+];
+
+let cart = [];
+
+function displayProducts(list){
+    const container = document.getElementById("productList");
+    container.innerHTML = "";
+
+    list.forEach((p,i)=>{
+        container.innerHTML += `
+        <div class="card">
+            <img src="${p.img}">
+            <h3>${p.name}</h3>
+            <p>$${p.price}</p>
+            <button onclick="addToCart(${i})">Add to Cart</button>
+        </div>`;
+    });
+}
+
+function addToCart(index){
+    cart.push(products[index]);
+    updateCart();
+}
+
+function removeFromCart(i){
+    cart.splice(i,1);
+    updateCart();
+}
+
+function updateCart(){
+    const cartDiv = document.getElementById("cartItems");
+    const totalSpan = document.getElementById("total");
+
+    cartDiv.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item,i)=>{
+        total += item.price;
+        cartDiv.innerHTML += `
+        <div class="cart-item">
+            ${item.name} - $${item.price}
+            <button onclick="removeFromCart(${i})">X</button>
+        </div>`;
+    });
+
+    totalSpan.textContent = total;
+}
+
+function filterProducts(){
+    const search = document.getElementById("search").value.toLowerCase();
+    const filtered = products.filter(p => p.name.toLowerCase().includes(search));
+    displayProducts(filtered);
+}
+
+// init
+displayProducts(products);
+
+</script>
+
+<footer>
+
+<style>
+.footer {
+    background: #2f343b;
+    color: white;
+    padding: 40px 20px;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.footer h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.footer a {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+.newsletter input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.newsletter button {
+    width: 100%;
+    padding: 10px;
+    background: #4cc9f0;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.social-icons {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bottom {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 12px;
+    color: #aaa;
+}
+
+.payment {
+    margin-top: 15px;
+}
+
+.payment img {
+    width: 250px;
+}
+</style>
+
+<div class="footer">
+
+    <div class="footer-container">
+
+        <!-- BRAND -->
+        <div>
+            <h3>DenimDot</h3>
+            <p>
+                DenimDot brings premium embroidered denim fashion inspired by modern street style and luxury craftsmanship.
+            </p>
+        </div>
+
+        <!-- INFORMATION -->
+        <div>
+            <h3>Information</h3>
+            <a href="#">FAQ</a>
+            <a href="#">About Us</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Delivery Details</a>
+            <a href="#">Return Policy</a>
+        </div>
+
+        <!-- CONTACT -->
+        <div>
+            <h3>Get in Touch</h3>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">WhatsApp</a>
+            <a href="#">TikTok</a>
+            <p><b>Store:</b> DenimDot Online</p>
+            <p>contact@denimdot.com</p>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="newsletter">
+            <h3>Subscribe</h3>
+            <input type="email" placeholder="Enter your email">
+            <button>Subscribe</button>
+
+            <div class="payment">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom">
+        © 2026 DenimDot | All Rights Reserved
+    </div>
+
+</div>
+
+</footer>
+
+</body>
+</html>
